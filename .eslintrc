@@ -11,7 +11,9 @@
     "indent": "off",
     "require-jsdoc": "off",
     "arrow-parens": "off",
-    "eol-last": "off"
+    "eol-last": "off",
+    "operator-linebreak": "off",
+    "no-trailing-spaces": "off"
   },
   "extends": ["eslint:recommended", "google"]
 }
