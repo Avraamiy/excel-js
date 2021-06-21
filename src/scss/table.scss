@@ -16,7 +16,40 @@
     height: $row-height;
   }
 
+  .row-resize {
+    height: 4px;
+    left: 0;
+
+    &:hover {
+      cursor: row-resize;
+    }
+  }
+
+  .col-resize {
+    top: 0;
+    width: 4px;
+
+    &:hover {
+      cursor: col-resize;
+      opacity: 1;
+    }
+  }
+
+  .col-resize, .row-resize {
+    position: absolute;
+    right: 0;
+    opacity: 0;
+    bottom: 0;
+    background-color: $primary_color;
+    z-index: 1000;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+
   .row-info {
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -33,9 +66,11 @@
     flex-direction: row;
 
     .column {
+      position: relative;
       height: 100%;
       background: #f8f9fa;
-      min-width: $cell-width;
+      width: $cell-width;
+      min-width: 40px;
       border: 1px solid $border_color;
       border-left: 0;
       border-top: 0;
@@ -46,12 +81,10 @@
   }
 
   .cell {
-    outline: none ;
+    min-height: 20px;
+    outline: none;
     height: 100%;
     min-width: 40px;
-    //display: flex;
-    //align-items: center;
-    //justify-content: center;
     width: $cell-width;
     padding: 5px;
     border: .5px solid $border_color;
@@ -62,9 +95,15 @@
 
     &.selected {
       border: none;
-      //outline: 2px solid #4386fc;
       outline: 2px solid #3c74ff;
       z-index: 2;
     }
   }
+}
+
+.column_resize {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+
 }

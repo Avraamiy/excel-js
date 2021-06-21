@@ -1,7 +1,7 @@
 class Dom {
     constructor(selector) {
         this.$el = typeof selector === 'string'
-        ? document.querySelector(selector) : selector
+            ? document.querySelector(selector) : selector
     }
 
     html(html) {
@@ -18,22 +18,47 @@ class Dom {
         return this
     }
 
+    get data() {
+        return this.$el.dataset
+    }
+
     append(node) {
         if (node instanceof Dom) {
             node = node.$el
         }
         if (Element.prototype.append) {
-        this.$el.append(node)
+            this.$el.append(node)
         } else {
-        this.$el.appendChild(node)
+            this.$el.appendChild(node)
         }
         return this
     }
+
     on(eventType, callback) {
         this.$el.addEventListener(eventType, callback)
     }
+
     off(eventType, callback) {
         this.$el.removeEventListener(eventType, callback)
+    }
+
+    closest(selector) {
+        return $(this.$el.closest(selector))
+    }
+
+    getCoords() {
+        return this.$el.getBoundingClientRect()
+    }
+
+    findAll(selecotor) {
+        return this.$el.querySelectorAll(selecotor)
+    }
+
+    css(styles = {}) {
+        Object.keys(styles).forEach(key => {
+            this.$el.style[key] = styles[key]
+        })
+        return this
     }
 }
 
