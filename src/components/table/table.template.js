@@ -3,23 +3,32 @@ const CODES = {
     Z: 90
 }
 
-function toCell(row, coll) {
+function toCell(row, col) {
     // const value = row + String.fromCharCode(CODES.A + coll)
-    return `<div class="cell" contenteditable></div>`
+    // eslint-disable-next-line max-len
+    return `<div class="cell" data-coll="${col}" contenteditable></div>`
 }
 
-function toColumn(content) {
+function toColumn(content, index) {
+    // console.log('content', content)
+    // const index = content.charCodeAt() - CODES.A
     return `
-        <div class="column">
-            ${content}
+        <div class="column " 
+                data-col="${index}" 
+                data-type="resizable">
+                    ${content}
+            <div class="col-resize" data-resize="col"></div>
         </div>
     `
 }
 
 function createRow(content = '', i) {
+    const resize = i ? `<div class="row-resize" data-resize="row"></div>` : ''
     return `
-    <div class="row">
-        <div class="row-info">${i ? i : ''}</div>
+        <div class="row" data-type="resizable" >
+        <div class="row-info">${i ? i : ''}
+            ${resize}
+        </div>
         <div class="row-data">${content}</div>
     </div>
     `
