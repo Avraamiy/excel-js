@@ -3,10 +3,15 @@ const CODES = {
     Z: 90
 }
 
-function toCell(row, col) {
-    // const value = row + String.fromCharCode(CODES.A + coll)
-    // eslint-disable-next-line max-len
-    return `<div class="cell" data-coll="${col}" contenteditable></div>`
+function toCell(row) {
+    return function(_, col) {
+        return `<div class="cell"
+                data-coll="${col}" 
+                data-type="cell"
+                data-id="${row}:${col}" 
+                contenteditable
+                ></div>`
+    }
 }
 
 function toColumn(content, index) {
@@ -51,12 +56,12 @@ export const createTable = (rowsCount = 15) => {
     const rows = []
     rows.push(createRow(coll))
 
-    for (let i = 0; i < rowsCount; i++) {
+    for (let row = 0; row < rowsCount; row++) {
         const cells = new Array(collCount)
             .fill('')
-            .map((_, index) => toCell(i + 1, index))
+            .map(toCell(row))
             .join('')
-        rows.push(createRow(cells, i + 1))
+        rows.push(createRow(cells, row + 1))
     }
 
     return rows.join('')
