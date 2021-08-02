@@ -3,9 +3,9 @@
         this.listners = {}
     }
 
-    emit(event, args) {
+    emit(event, ...args) {
       if (!Array.isArray(this.listners[event])) return false
-        this.listners[event].forEach(listener => listener(args))
+        this.listners[event].forEach(listener => listener(...args))
         return true
     }
 
