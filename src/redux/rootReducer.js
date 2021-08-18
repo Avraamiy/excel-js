@@ -3,7 +3,7 @@ import {
     CHANGE_STYLES,
     RESIZE_TABLE,
     APPLY_STYLE,
-    CHANGE_TITLE
+    CHANGE_TITLE, SAVE_DATE
 } from './types'
 
 export function rootReducer(state, action) {
@@ -35,6 +35,8 @@ export function rootReducer(state, action) {
             }
         case CHANGE_TITLE:
             return {...state, title: action.data}
+        case SAVE_DATE:
+            return {...state, openedDate: new Date().toJSON()}
         default: return state
     }
 }

@@ -23,7 +23,7 @@ export class ExcelComponent extends DOMListener {
 
     destroy() {
         this.removeDomListener()
-        this.unsubscribers(unsub => unsub())
+        this.unsubscribers.forEach(unsub => unsub())
     }
 
     $emit(event, args) {
